@@ -13,6 +13,7 @@ import LostAndFound from './component/page/lostAndFound/LostAndFound';
 import AddItem from './component/page/addItem/AddItem';
 import Login from './component/auth/Login';
 import Register from './component/auth/Register';
+import AuthProvider from './component/authProvider/AuthProvider';
 
 
 const router = createBrowserRouter([
@@ -47,6 +48,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )
