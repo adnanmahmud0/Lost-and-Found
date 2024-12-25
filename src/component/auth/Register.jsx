@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { AuthContext } from "../authProvider/AuthProvider";
 
 const Register = () => {
-    const { createUser } = useContext(AuthContext);
+    const { createUser,  } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePassword = () => {

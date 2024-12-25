@@ -1,9 +1,19 @@
-import { FaUser, FaEye } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { IoIosMail } from "react-icons/io";
+import { Link, useNavigate } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import Swal from 'sweetalert2';
+import { useContext, useState } from 'react';
+import { TbPassword } from "react-icons/tb";
+import { AuthContext } from '../authProvider/AuthProvider';
 
 const Login = () => {
+    const { loginUser, loginWithGoogle } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePassword = () => {
+        setShowPassword((prev) => !prev);
+    };
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -42,7 +52,42 @@ const Login = () => {
         }
 
         console.log(email, password);
+
+        loginUser(email, password)
+            .then(result => {
+                e.target.reset();
+                Swal.fire({
+                    title: "Good job!",
+                    text: "Login Successfully!",
+                    icon: "success"
+                });
+                navigate('/');
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: "Error!",
+                    text: error.message,
+                    icon: "error"
+                });
+            });
     };
+
+    const handleGoogleLogin = () => {
+        loginWithGoogle()
+        .then(result => {
+            Swal.fire({
+                title: "Good job!",
+                text: "Login Successfully!",
+                icon: "success"
+            });
+            navigate('/');
+        })
+        .then(error => Swal.fire({
+            title: "Error!",
+            text: error.message,
+            icon: "error"
+        }));
+    }
 
     return (
         <div>
@@ -59,15 +104,15 @@ const Login = () => {
                                 </div>
 
                                 <div>
-                                    <label className="text-gray-800 text-sm mb-2 block">User name</label>
+                                    <label className="text-gray-800 text-sm mb-2 block">Email</label>
                                     <div className="relative flex items-center">
                                         <input
                                             name="email"
                                             type="email"
                                             className="w-full text-sm text-gray-800 border border-gray-300 px-4 py-3 rounded-lg outline-blue-600"
-                                            placeholder="Enter user name"
+                                            placeholder="Enter user email"
                                         />
-                                        <FaUser className="absolute right-4 text-gray-400" />
+                                        <IoIosMail className="absolute right-4 text-gray-400" />
                                     </div>
                                 </div>
                                 <div>
@@ -75,31 +120,30 @@ const Login = () => {
                                     <div className="relative flex items-center">
                                         <input
                                             name="password"
-                                            type="password"
+                                            type={showPassword ? "text" : "password"}
                                             className="w-full text-sm text-gray-800 border border-gray-300 px-4 py-3 rounded-lg outline-blue-600"
                                             placeholder="Enter password"
                                         />
-                                        <FaEye className="absolute right-4 text-gray-400 cursor-pointer" />
+                                        <TbPassword className="absolute right-4 text-gray-400" />
                                     </div>
                                 </div>
 
                                 <div className="flex flex-wrap items-center justify-between gap-4">
                                     <div className="flex items-center">
                                         <input
-                                            id="remember-me"
-                                            name="remember-me"
+                                            onClick={togglePassword}
                                             type="checkbox"
                                             className="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                                         />
-                                        <label htmlFor="remember-me" className="ml-3 block text-sm text-gray-800">
-                                            Remember me
+                                        <label  htmlFor="remember-me" className="ml-3 block text-sm text-gray-800">
+                                            Show Password
                                         </label>
                                     </div>
 
                                     <div className="text-sm">
-                                        <a href="javascript:void(0);" className="text-blue-600 hover:underline font-semibold">
+                                        <Link to="/forget-password" className="text-blue-600 hover:underline font-semibold">
                                             Forgot your password?
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
 
@@ -116,6 +160,7 @@ const Login = () => {
                                 </div>
                                 <div>
                                     <button
+                                        onClick={handleGoogleLogin}
                                         type="button"
                                         className="w-full shadow-xl py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
                                     >

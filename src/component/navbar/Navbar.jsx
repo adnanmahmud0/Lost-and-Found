@@ -1,14 +1,18 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../authProvider/AuthProvider";
 
 
 const Navbar = () => {
 
+    const { user, logOut } = useContext(AuthContext);
+    const navigate = useNavigate();
+
     const link = <>
-                    <li><Link to="/" className="">Home</Link></li>
-                    <li><Link to="/lost-and-found" className="">Lost & Found</Link></li>
-                    <li><Link to="/add-items" className="">Add Item</Link></li>
-                </>
-    
+        <li><Link to="/" className="">Home</Link></li>
+        <li><Link to="/lost-and-found" className="">Lost & Found</Link></li>
+    </>
+
 
     return (
         <div>
@@ -40,8 +44,51 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end space-x-5">
-                    <Link to="/login" className="btn rounded-full">Login</Link>
-                    <Link to="/register" className="btn rounded-full">Register</Link>
+                    {user ? (
+                        <div className="flex items-center space-x-5">
+                            <div className="dropdown dropdown-end relative group">
+                                <div
+                                    tabIndex={0}
+                                    role="button"
+                                    className="btn btn-ghost btn-circle avatar"
+                                >
+                                    <div className="w-10 rounded-full">
+                                        <img
+                                            alt={user.displayName}
+                                            src={user.photoURL}
+                                        />
+                                    </div>
+                                </div>
+
+                                <span className="absolute top-12 left-1/2 -translate-x-1/2 scale-0 rounded bg-gray-800 p-2 text-sm text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
+                                    {user.displayName}
+                                </span>
+
+                                <ul
+                                    tabIndex={0}
+                                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-60 p-2 shadow"
+                                >
+                                    <li><Link to="/add-items">Add Lost & Found Item Page</Link></li>
+                                    <li><Link>All Recovered Items Page</Link></li>
+                                    <li><Link>Manage My Items Page</Link></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <a className="btn" onClick={logOut}>Logout</a>
+                            </div>
+                        </div>
+
+                    ) : (
+                        <>
+                            <li>
+                                <Link className="btn" to="/login">Login</Link>
+                            </li>
+                            <li>
+                                <Link className="btn" to="/register">Register</Link>
+                            </li>
+                        </>
+
+                    )}
                 </div>
             </div>
         </div>

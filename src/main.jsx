@@ -14,6 +14,7 @@ import AddItem from './component/page/addItem/AddItem';
 import Login from './component/auth/Login';
 import Register from './component/auth/Register';
 import AuthProvider from './component/authProvider/AuthProvider';
+import ForgetPassword from './component/auth/ForgetPassword';
 
 
 const router = createBrowserRouter([
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/forget-password",
+        element: <ForgetPassword></ForgetPassword>
       }
     ]
     
