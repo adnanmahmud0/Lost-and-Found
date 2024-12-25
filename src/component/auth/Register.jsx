@@ -1,66 +1,59 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
+import { ToastContainer, toast } from 'react-toastify';
 import { AuthContext } from "../authProvider/AuthProvider";
 
 const Register = () => {
-    const { createUser,  } = useContext(AuthContext);
+    const { createUser, updateUserProfile } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
-
+    const navigator = useNavigate();
     const togglePassword = () => {
         setShowPassword((prev) => !prev);
     };
 
     const handleRegister = (e) => {
         e.preventDefault();
-        const name = e.target.name.value;
+        const displayName = e.target.name.value;
         const email = e.target.email.value;
-        const photo = e.target.photo.value;
+        const photoURL = e.target.photo.value;
         const password = e.target.password.value;
 
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         // Validation checks
-        if (!name || !email || !photo || !password) {
-            Swal.fire({
-                icon: "error",
-                title: "Validation Error",
-                text: "All fields are required.",
-            });
+        if (!displayName || !email || !photoURL || !password) {
+            toast.error("All fields are required.");
             return;
         }
 
         if (!emailRegex.test(email)) {
-            Swal.fire({
-                icon: "error",
-                title: "Email Error",
-                text: "Please enter a valid email address.",
-            });
+            toast.error("Please enter a valid email address.");
             return;
         }
 
         if (!passwordRegex.test(password)) {
-            Swal.fire({
-                icon: "error",
-                title: "Password Error",
-                text: "Password must contain at least one uppercase letter, one lowercase letter, and be at least 6 characters long.",
-            });
+            toast.error("Password must contain at least one uppercase letter, one lowercase letter, and be at least 6 characters long.");
             return;
         }
 
-        createUser(email, password);
-            
+        createUser(email, password)
+            .then(result => {
+                e.target.reset();
+                Swal.fire({
+                    icon: "success",
+                    title: "Registration Successful",
+                    text: "You have successfully registered!",
+                });
+                updateUserProfile({ displayName, photoURL });
+                navigator('/');
+            })
+            .catch(error => {
+                toast.error("Something went wrong!");
+                return;
+            });
 
-        // Success Message
-        Swal.fire({
-            icon: "success",
-            title: "Registration Successful",
-            text: "You have successfully registered!",
-        });
-
-        // Clear the form
-        e.target.reset();
     };
 
     return (
@@ -145,6 +138,7 @@ const Register = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer position="top-center" />
         </div>
     );
 };

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../authProvider/AuthProvider";
 import  WhereIsIt  from "../../assets/whereIsIt.png";
+import Swal from 'sweetalert2';
 
 
 const Navbar = () => {
@@ -13,6 +14,20 @@ const Navbar = () => {
         <li><Link to="/" className="">Home</Link></li>
         <li><Link to="/lost-and-found" className="">Lost & Found</Link></li>
     </>
+
+    const handelLogout = () => {
+        logOut()
+        .then(() => {
+            Swal.fire({
+              title: "Good job!",
+              text: "Logged out successfully!",
+              icon: "success",
+            });
+            navigate("/");
+          })
+          .catch((error) => Swal.fire("Error", error.message, "error"));
+
+    }
 
 
     return (
@@ -79,18 +94,18 @@ const Navbar = () => {
                                 </ul>
                             </div>
                             <div>
-                                <a className="btn" onClick={logOut}>Logout</a>
+                                <a className="btn" onClick={handelLogout}>Logout</a>
                             </div>
                         </div>
 
                     ) : (
                         <>
-                            <li>
+                            <div>
                                 <Link className="btn" to="/login">Login</Link>
-                            </li>
-                            <li>
+                            </div>
+                            <div>
                                 <Link className="btn" to="/register">Register</Link>
-                            </li>
+                            </div>
                         </>
 
                     )}

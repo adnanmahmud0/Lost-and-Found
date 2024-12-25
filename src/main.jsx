@@ -15,6 +15,7 @@ import Login from './component/auth/Login';
 import Register from './component/auth/Register';
 import AuthProvider from './component/authProvider/AuthProvider';
 import ForgetPassword from './component/auth/ForgetPassword';
+import PrivateRoute from './component/privateRoute/PrivateRoute';
 
 
 const router = createBrowserRouter([
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/lost-and-found",
-        element: <LostAndFound></LostAndFound>,
+        element: <PrivateRoute><LostAndFound></LostAndFound>,</PrivateRoute>
       },
       {
         path: "/add-items",
