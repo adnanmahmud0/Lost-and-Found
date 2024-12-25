@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../authProvider/AuthProvider";
+import  WhereIsIt  from "../../assets/whereIsIt.png";
 
 
 const Navbar = () => {
@@ -36,7 +37,11 @@ const Navbar = () => {
                         <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">{link}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">daisyUI</a>
+                    <div className="flex items-center space-x-2">
+                        <img src={WhereIsIt} alt="" className="w-10 h-10" />
+                        <a className="font-extrabold text-lg">WhereIsIt</a>
+                    </div>
+                    
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
