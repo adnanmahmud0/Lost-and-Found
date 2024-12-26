@@ -3,7 +3,8 @@ import React, { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from "../../authProvider/AuthProvider";
-import axios from "axios";
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const Item = () => {
     const item = useLoaderData();
@@ -12,15 +13,40 @@ const Item = () => {
     const [showModal, setShowModal] = useState(false);
     const [recoveredDate, setRecoveredDate] = useState(new Date());
     const [recoveredLocation, setRecoveredLocation] = useState("");
+    const [status, setStatus] = useState(item.status);
 
-    const handleModalSubmit = () => {
+    const handleModalSubmit = async (e) => {
+        e.preventDefault();
 
-        
-        const item = {recoveredLocation, recoveredDate, recoveredPerson: user};
-        axios.post('http://localhost:5000/recovered-item', item)
-        setShowModal(false);
-        alert("Recovery information submitted successfully!");
+        const recoverItem = {
+            recoveredLocation,
+            recoveredDate,
+            recoveredPerson: user,
+            recoverItem: item
+        };
+
+        const updatedStatus = { status: "recovered" };
+
+        try {
+            await axios.post('http://localhost:5000/recovered-item', recoverItem);
+            await axios.put(`http://localhost:5000/status-update/${item._id}`, updatedStatus);
+            setShowModal(false);
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Item marked as recovered.',
+            });
+            setStatus("recovered");
+        } catch (error) {
+            console.error("Error updating status:", error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: 'Failed to update item status.',
+            });
+        }
     };
+
 
     return (
         <div>
@@ -40,16 +66,16 @@ const Item = () => {
                             </div>
                             <div className="flex gap-4 mt-12 max-w-md">
                                 {item.postType === "Lost" ? (
-                                    <button 
-                                        type="button" 
+                                    <button
+                                        type="button"
                                         className="w-full px-4 py-2.5 outline-none border border-blue-600 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded"
                                         onClick={() => setShowModal(true)}
                                     >
                                         Found This
                                     </button>
                                 ) : (
-                                    <button 
-                                        type="button" 
+                                    <button
+                                        type="button"
                                         className="w-full px-4 py-2.5 outline-none border border-blue-600 bg-transparent hover:bg-gray-50 text-gray-800 text-sm font-semibold rounded"
                                         onClick={() => setShowModal(true)}
                                     >
@@ -91,13 +117,13 @@ const Item = () => {
                         <p className="text-sm mb-4">Email: {user.email}</p>
 
                         <div className="flex justify-end gap-4">
-                            <button 
+                            <button
                                 className="px-4 py-2 bg-gray-400 text-white rounded"
                                 onClick={() => setShowModal(false)}
                             >
                                 Cancel
                             </button>
-                            <button 
+                            <button
                                 className="px-4 py-2 bg-blue-600 text-white rounded"
                                 onClick={handleModalSubmit}
                             >
