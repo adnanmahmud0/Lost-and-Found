@@ -18,8 +18,12 @@ const LostAndFound = () => {
                             <div className="flex flex-col h-full bg-gray-100 p-4">
                                 <div className="">
                                     <h3 className="text-sm sm:text-base font-bold text-gray-800">{item.title}</h3>
+                                    {(item.status === "not-recovered") ? (
+                                        <h1 className="absolute top-5 text-sm sm:text-sm text-white bg-blue-600 font-bold p-2 rounded-full">{item.postType}</h1>
+                                    ) : (
+                                        <h1 className="absolute top-5 text-sm sm:text-sm text-white bg-slate-600 font-bold p-2 rounded-full">Recovered</h1>
+                                    )}
                                     
-                                    <h1 className="absolute top-5 text-sm sm:text-sm text-white bg-blue-600 font-bold p-2 rounded-full">{item.postType}</h1>
 
                                     <p className="text-sm sm:text-xs">{item.location}</p>
                                 </div>

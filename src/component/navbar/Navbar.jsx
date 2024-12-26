@@ -90,7 +90,7 @@ const Navbar = () => {
                                 >
                                     <li><Link to="/add-items">Add Lost & Found Item Page</Link></li>
                                     <li><Link>All Recovered Items Page</Link></li>
-                                    <li><Link>Manage My Items Page</Link></li>
+                                    <li><Link to={`/my-items`}>Manage My Items Page</Link></li>
                                 </ul>
                             </div>
                             <div>

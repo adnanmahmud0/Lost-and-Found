@@ -1,48 +1,6 @@
-import React, { useContext, useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { AuthContext } from '../../authProvider/AuthProvider';
-import axios from 'axios';
-import Swal from 'sweetalert2';
 
 
-const AddItem = () => {
-    const { user } = useContext(AuthContext);
-    const [dateLost, setDateLost] = useState(new Date());
-
-    const handleAddItem = (e) => {
-        e.preventDefault();
-        const postType = e.target.postType.value;
-        const thumbnail = e.target.thumbnail.value;
-        const title = e.target.title.value;
-        const category = e.target.category.value;
-        const description = e.target.description.value;
-        const location = e.target.location.value;
-        const xDateLost = dateLost;
-        const userName = e.target.username.value;
-        const email = e.target.email.value;
-        const status = e.target.status.value;
-        const photoURL = e.target.photoURL.value;
-
-        const items = { postType, thumbnail, title, category, description, location, xDateLost, userName, email, photoURL, status };
-        axios.post('http://localhost:5000/add-items', items)
-            .then(() => {
-                e.target.reset();
-                Swal.fire({
-                    title: "Good job!",
-                    text: "Login Successfully!",
-                    icon: "success"
-                });
-            })
-            .catch(() => {
-                Swal.fire({
-                    title: "Error!",
-                    text: "Something went wrong!",
-                    icon: "error"
-                });
-            });
-    }
-
+const EditMyItems = () => {
     return (
         <div className="max-w-4xl mx-auto p-6">
             <div className="text-center mb-16">
@@ -105,4 +63,4 @@ const AddItem = () => {
     );
 };
 
-export default AddItem;
+export default EditMyItems;

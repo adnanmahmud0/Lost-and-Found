@@ -62,26 +62,48 @@ const Item = () => {
                         <div className="lg:col-span-2">
                             <h3 className="text-xl font-bold text-gray-800">{item.title}</h3>
                             <div className="flex flex-wrap gap-4 mt-6">
-                                <p className="text-gray-800 text-2xl font-bold">${item.postType}</p>
+                                <p className="text-gray-800 text-2xl font-bold">{item.postType}</p>
                             </div>
+                            <p className="text-gray-800 mt-5">Category: {item.category}</p>
+                            <p className="text-gray-800 ">Location: {item.location}</p>
+                            <p className="text-gray-800 ">Date: {item.xDateLost}</p>
+                            <p className="text-gray-800 mt-5">User Name: {item.userName}</p>
+                            <p className="text-gray-800 ">User Email: {item.email}</p>
                             <div className="flex gap-4 mt-12 max-w-md">
-                                {item.postType === "Lost" ? (
+                                {(item.postType === "Lost" && item.status === "not-recovered") ? (
                                     <button
+
                                         type="button"
                                         className="w-full px-4 py-2.5 outline-none border border-blue-600 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded"
                                         onClick={() => setShowModal(true)}
                                     >
                                         Found This
                                     </button>
-                                ) : (
-                                    <button
-                                        type="button"
-                                        className="w-full px-4 py-2.5 outline-none border border-blue-600 bg-transparent hover:bg-gray-50 text-gray-800 text-sm font-semibold rounded"
-                                        onClick={() => setShowModal(true)}
-                                    >
-                                        This is Mine
-                                    </button>
-                                )}
+                                )
+
+                                    :
+                                    (item.postType === "Found" && item.status === "not-recovered") ? (
+                                        <button
+                                            type="button"
+                                            className="w-full px-4 py-2.5 outline-none border border-blue-600 bg-transparent hover:bg-gray-50 text-gray-800 text-sm font-semibold rounded"
+                                            onClick={() => setShowModal(true)}
+                                        >
+                                            This is Mine
+                                        </button>
+                                    )
+
+                                        :
+
+                                        (
+                                            <button
+                                                type="button"
+                                                className="w-full px-4 py-2.5 outline-none border border-gray-300 bg-gray-300 text-gray-800 text-sm font-semibold rounded"
+                                                disabled
+                                            >
+                                                {item.status}
+                                            </button>
+
+                                        )}
                             </div>
                         </div>
                     </div>

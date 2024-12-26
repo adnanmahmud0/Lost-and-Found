@@ -17,6 +17,7 @@ import AuthProvider from './component/authProvider/AuthProvider';
 import ForgetPassword from './component/auth/ForgetPassword';
 import PrivateRoute from './component/privateRoute/PrivateRoute';
 import Item from './component/page/lostAndFound/Item';
+import MyItems from './component/page/myItems/MyItems';
 
 
 const router = createBrowserRouter([
@@ -52,6 +53,15 @@ const router = createBrowserRouter([
       {
         path: "/item/:id",
         element: <PrivateRoute><Item></Item></PrivateRoute>,
+        loader: ({params}) => fetch(`http://localhost:5000/items/${params.id}`),
+      },
+      {
+        path: "/my-items",
+        element: <PrivateRoute><MyItems></MyItems></PrivateRoute>,
+      },
+      {
+        path: "/edit-my-items/:id",
+        element: <PrivateRoute><AddItem></AddItem></PrivateRoute>,
         loader: ({params}) => fetch(`http://localhost:5000/items/${params.id}`),
       }
     ]
