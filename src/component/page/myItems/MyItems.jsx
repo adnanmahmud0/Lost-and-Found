@@ -2,22 +2,33 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../authProvider/AuthProvider';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
-const data = [];
+
 
 const MyItems = () => {
+
     const { user } = useContext(AuthContext);
-    const [items, setItems] = useState(data);
+    const [items, setItems] = useState([]);
+    
+
+
     useEffect(() => {
-        fetch(`http://localhost:5000/items?email=${user.email}`)
-            .then(res => res.json())
-            .then(data => setItems(data))
+        const fetchItems = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/useritems?email=${user.email}`, { 
+                    withCredentials: true // Important: Allows sending cookies
+                });
+                setItems(response.data);
+            } catch (error) {
+                console.error("Error fetching items:", error);
+            }
+        };
+
+        fetchItems();
     }, [user.email]);
 
     console.log(items);
-
-
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -42,7 +53,7 @@ const MyItems = () => {
     };
 
     return (
-        <div className="overflow-x-auto font-[sans-serif]">
+        <div className="overflow-x-auto">
             {items.length === 0 ? (
                 <p className="text-center text-gray-500">You don't have any posts</p>
             ) : (

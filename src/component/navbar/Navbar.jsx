@@ -89,7 +89,7 @@ const Navbar = () => {
                                     className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-60 p-2 shadow"
                                 >
                                     <li><Link to="/add-items">Add Lost & Found Item Page</Link></li>
-                                    <li><Link to="/all-recoverd-items">All Recovered Items Page</Link></li>
+                                    <li><Link to={`/all-recoverd-items`}>All Recovered Items Page</Link></li>
                                     <li><Link to={`/my-items`}>Manage My Items Page</Link></li>
                                 </ul>
                             </div>

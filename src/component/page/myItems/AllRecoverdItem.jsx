@@ -1,8 +1,31 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../authProvider/AuthProvider';
+import axios from 'axios';
 
 const AllRecoverdItem = () => {
-    const items = useLoaderData();
+
+    const { user } = useContext(AuthContext);
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        const fetchItems = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/recovered-item?email=${user.email}`, { 
+                    withCredentials: true // Important: Allows sending cookies
+                });
+                setItems(response.data);
+            } catch (error) {
+                console.error("Error fetching items:", error);
+            }
+        };
+
+        fetchItems();
+    }, [user.email]);
+
+    console.log(user.email);
+
+
     return (
         <div className="overflow-x-auto">
             {items.length === 0 ? (
