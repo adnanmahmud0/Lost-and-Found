@@ -28,8 +28,8 @@ const Item = () => {
         const updatedStatus = { status: "recovered" };
 
         try {
-            await axios.post('http://localhost:5000/recovered-item', recoverItem);
-            await axios.put(`http://localhost:5000/status-update/${item._id}`, updatedStatus);
+            await axios.post('https://whereisit-api-server.vercel.app/recovered-item', recoverItem);
+            await axios.put(`https://whereisit-api-server.vercel.app/status-update/${item._id}`, updatedStatus);
             setShowModal(false);
             Swal.fire({
                 icon: 'success',

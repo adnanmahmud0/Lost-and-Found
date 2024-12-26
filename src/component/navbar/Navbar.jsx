@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../authProvider/AuthProvider";
 import  WhereIsIt  from "../../assets/whereIsIt.png";
 import Swal from 'sweetalert2';
+import axios from "axios";
 
 
 const Navbar = () => {

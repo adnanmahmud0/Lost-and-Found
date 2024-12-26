@@ -25,7 +25,7 @@ const AddItem = () => {
         const photoURL = e.target.photoURL.value;
 
         const items = { postType, thumbnail, title, category, description, location, xDateLost, userName, email, photoURL, status };
-        axios.post('http://localhost:5000/add-items', items)
+        axios.post('https://whereisit-api-server.vercel.app/add-items', items)
             .then(() => {
                 e.target.reset();
                 Swal.fire({

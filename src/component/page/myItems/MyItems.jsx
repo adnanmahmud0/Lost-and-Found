@@ -16,7 +16,7 @@ const MyItems = () => {
     useEffect(() => {
         const fetchItems = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/useritems?email=${user.email}`, { 
+                const response = await axios.get(`https://whereisit-api-server.vercel.app/useritems?email=${user.email}`, { 
                     withCredentials: true // Important: Allows sending cookies
                 });
                 setItems(response.data);
@@ -41,7 +41,7 @@ const MyItems = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:5000/items/${id}`);
+                axios.delete(`https://whereisit-api-server.vercel.app/items/${id}`);
                 Swal.fire({
                     title: "Deleted!",
                     text: "Your file has been deleted.",

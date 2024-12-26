@@ -28,7 +28,7 @@ const EditMyItems = () => {
         // Assuming you'd handle data submission here
         const updateItem = { postType, thumbnail, title, category, description, location, xDateLost, userName, email, photoURL, status };
 
-        axios.put(`http://localhost:5000/items/${item._id}`, updateItem)
+        axios.put(`https://whereisit-api-server.vercel.app/items/${item._id}`, updateItem)
             .then(() => {
                 e.target.reset();
                 Swal.fire({

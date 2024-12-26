@@ -33,8 +33,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/lost-and-found",
-        element: <PrivateRoute><LostAndFound></LostAndFound>,</PrivateRoute>,
-        loader: () => fetch("http://localhost:5000/items"),
+        element: <LostAndFound></LostAndFound>,
+        loader: () => fetch("https://whereisit-api-server.vercel.app/items"),
       },
       {
         path: "/add-items",
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
       {
         path: "/item/:id",
         element: <PrivateRoute><Item></Item></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/items/${params.id}`),
+        loader: ({params}) => fetch(`https://whereisit-api-server.vercel.app/items/${params.id}`),
       },
       {
         path: "/my-items",
@@ -64,7 +64,7 @@ const router = createBrowserRouter([
       {
         path: "/edit-my-items/:id",
         element: <PrivateRoute><EditMyItems></EditMyItems></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/items/${params.id}`),
+        loader: ({params}) => fetch(`https://whereisit-api-server.vercel.app/items/${params.id}`),
       },
       {
         path: "/all-recoverd-items",

@@ -62,6 +62,11 @@ const Login = () => {
                     text: "Login Successfully!",
                     icon: "success"
                 });
+                const user = { email: email}
+                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+                .then(res => {
+                    console.log(res.data);
+                })
                 navigate('/');
             })
             .catch(error => {
@@ -82,7 +87,6 @@ const Login = () => {
                 icon: "success"
             });
             navigate('/');
-            
         })
         .then(error => Swal.fire({
             title: "Error!",
