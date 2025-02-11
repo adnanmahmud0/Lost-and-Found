@@ -11,9 +11,7 @@ const AllRecoverdItem = () => {
     useEffect(() => {
         const fetchItems = async () => {
             try {
-                const response = await axios.get(`https://whereisit-api-server.vercel.app/recovered-item?email=${user.email}`,{ 
-                    withCredentials: true // Important: Allows sending cookies
-                });
+                const response = await axios.get(`https://whereisit-api-server.vercel.app/recovered-item?email=${user.email}`);
                 setItems(response.data);
             } catch (error) {
                 console.error("Error fetching items:", error);

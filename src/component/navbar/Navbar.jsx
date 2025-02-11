@@ -3,13 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../authProvider/AuthProvider";
 import  WhereIsIt  from "../../assets/whereIsIt.png";
 import Swal from 'sweetalert2';
-import axios from "axios";
 
 
 const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    
 
     const link = <>
         <li><Link to="/" className="">Home</Link></li>

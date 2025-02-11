@@ -5,12 +5,35 @@ import volentier from "../../../assets/our-mission_03.png";
 import winter from "../../../assets/winter-768x1024.jpg";
 import { BiDonateHeart } from "react-icons/bi";
 import { GrImpact } from "react-icons/gr";
+import { LuLayoutList } from "react-icons/lu";
+import { LuLayoutGrid } from "react-icons/lu";
 
 
 import { CiCirclePlus } from "react-icons/ci";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import { useState } from "react";
 
 const Home = () => {
+    const items = useLoaderData();
+    const limitedItems = items.slice(0, 8);
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const filteredItems = limitedItems.filter(item =>
+        item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.location.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    const [gradView, setGradView] = useState(true);
+    const [listView, setListView] = useState(false);
+
+    const greed = () => {
+        setGradView(true);
+        setListView(false);
+    }
+    const list = () => {
+        setGradView(false);
+        setListView(true);
+    }
     return (
         <div>
             <div>
@@ -53,17 +76,11 @@ const Home = () => {
                             <div class=" text-center">
                                 <p className="text-white">WE ARE ALWAYS OPEN FOR CHILDREN</p>
                                 <h1 class="text-4xl md:text-7xl font-bold text-white mb-6 animate__animated animate__bounce">
-                                    Join Our Mission for a <br /> Warmer Bangladesh
+                                    Join Our Mission <br /> and find lost item
                                 </h1>
                                 <p class="text-sm text-gray-200 mb-8 animate__animated animate__bounce">
                                     Your small gesture can save lives. <br /> Become a donor or volunteer today.
                                 </p>
-                                <a
-                                    href="#getinvolve"
-                                    class="bg-[#4FC3F7] hover:bg-[#FFFFFF] hover:text-black text-white font-semibold text-lg py-3 px-8 rounded-full shadow-lg transition"
-                                >
-                                    Get Involved
-                                </a>
                             </div>
                         </div>
                         <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
@@ -91,7 +108,7 @@ const Home = () => {
                                 </p>
                                 <Link
                                     to="/DonationCampaigns"
-                                    class="bg-[#4FC3F7] hover:bg-[#FFFFFF] hover:text-black text-white font-semibold text-lg py-3 px-8 rounded-full shadow-lg transition"
+                                    class="bg-blue-600 hover:bg-[#FFFFFF] hover:text-black text-white font-semibold text-lg py-3 px-8 rounded-full shadow-lg transition"
                                 >
                                     Donate Now
                                 </Link>
@@ -111,111 +128,107 @@ const Home = () => {
                             src={winter}
                             className="max-w-sm rounded-lg shadow-2xl md:w-[50%] w-[90%]" />
                         <div className="md:w-[50%] p-5">
-                            <h1 className="md:text-6xl text-[#4FC3F7] text-3xl font-bold animate__animated animate__bounce">About Us</h1>
+                            <h1 className="md:text-6xl text-blue-600 text-3xl font-bold animate__animated animate__bounce">About Us</h1>
                             <p className="py-6">
                                 When winter comes, thousands of lives across Bangladesh are impacted by the harsh cold.
-                                At <span class="text-[#4FC3F7] font-semibold">Heat of Giving</span>, we strive to
+                                At <span class="text-blue-600 font-semibold">Where Is It</span>, we strive to
                                 provide warmth to those in need through generous donations and a shared sense of
                                 community.
                             </p>
-                            <button className="btn bg-[#4FC3F7] text-white hover:text-black">Get Started</button>
+                            <button className="btn bg-blue-600 text-white hover:text-black">Get Started</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div>
-                <section class="bg-white py-16 px-6">
-                    <div class="max-w-7xl mx-auto text-center">
-                        <h2 class="text-3xl md:text-4xl font-bold text-[#4FC3F7] mb-6 animate__animated animate__bounce">How It Works</h2>
-                        <p class="text-lg text-gray-600 mb-12">
-                            Donating winter clothing is simple and impactful. Follow these three steps to bring warmth to those in need.
-                        </p>
-
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-
-                            <div class="flex flex-col items-center">
-                                <div class="bg-blue-100 p-6 rounded-full shadow-md mb-6">
-                                    <div><CiCirclePlus className="size-10" /></div>
-                                </div>
-                                <h3 class="text-xl font-semibold text-black mb-2">Step 1: Choose a Campaign</h3>
-                                <p class="text-gray-600 text-center">
-                                    Browse through our active donation campaigns and select one that resonates with you.
-                                </p>
-                            </div>
-
-                            <div class="flex flex-col items-center">
-                                <div class="bg-orange-100 p-6 rounded-full shadow-md mb-6">
-                                    <div><BiDonateHeart className="size-10" /></div>
-                                </div>
-                                <h3 class="text-xl font-semibold text-black mb-2">Step 2: Donate Items</h3>
-                                <p class="text-gray-600 text-center">
-                                    Fill out the donation form with details about your items, pickup location, and additional notes.
-                                </p>
-                            </div>
-
-                            <div class="flex flex-col items-center">
-                                <div class="bg-green-100 p-6 rounded-full shadow-md mb-6">
-                                    <div><GrImpact className="size-10" /></div>
-                                </div>
-                                <h3 class="text-xl font-semibold text-black mb-2">Step 3: Make an Impact</h3>
-                                <p class="text-gray-600 text-center">
-                                    Our volunteers will collect and distribute your donations to those in need, bringing warmth and hope.
-                                </p>
-                            </div>
+            <div className="py-4 mx-auto max-w-7xl">
+                <div>
+                    <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 text-center">Lost and Found Items</h1>
+                </div>
+                <div className="flex justify-between mt-6 mx-5">
+                    <div>
+                        <div className="flex px-4 py-3 rounded-md border-2 border-blue-500 overflow-hidden max-w-md mx-auto mt-5">
+                            <input
+                                type="text"
+                                placeholder="Search items..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="w-full outline-none bg-transparent text-gray-600 text-sm"
+                            />
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 192.904 192.904"
+                                width="16px"
+                                className="fill-gray-600"
+                            >
+                                <path d="m190.707 180.101-47.078-47.077c11.702-14.072 18.752-32.142 18.752-51.831C162.381 36.423 125.959 0 81.191 0 36.422 0 0 36.423 0 81.193c0 44.767 36.422 81.187 81.191 81.187 19.688 0 37.759-7.049 51.831-18.751l47.079 47.078a7.474 7.474 0 0 0 5.303 2.197 7.498 7.498 0 0 0 5.303-12.803zM15 81.193C15 44.694 44.693 15 81.191 15c36.497 0 66.189 29.694 66.189 66.193 0 36.496-29.692 66.187-66.189 66.187C44.693 147.38 15 117.689 15 81.193z">
+                                </path>
+                            </svg>
                         </div>
                     </div>
-                </section>
-                <div className="mt-5">
-                    <h3 className="text-3xl font-semibold text-black text-center mb-5">Donation Collection Points</h3>
-                    <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6">
-                        <div className="bg-white shadow-md rounded-lg p-6">
-                            <img className="h-[150px] w-full object-cover rounded-md" src={banner1} alt="" />
-                            <h3 className="text-xl font-semibold text-gray-800">
-                                Dhaka
-                            </h3>
-                            <p className="text-gray-600 mt-2">
-                                House #12, Road 5, Mirpur, Dhaka
-                            </p>
-                            <p className="text-sm text-gray-500">9 AM - 6 PM</p>
-                        </div>
-                        <div className="bg-white shadow-md rounded-lg p-6">
-                            <img className="h-[150px] w-full object-cover rounded-md" src={banner2} alt="" />
-                            <h3 className="text-xl font-semibold text-gray-800">
-                                Chattogram
-                            </h3>
-                            <p className="text-gray-600 mt-2">
-                                Block A, Agrabad, Chattogram
-                            </p>
-                            <p className="text-sm text-gray-500">10 AM - 5 PM</p>
-                        </div>
-                        <div className="bg-white shadow-md rounded-lg p-6">
-                            <img className="h-[150px] w-full object-cover rounded-md" src={banner3} alt="" />
-                            <h3 className="text-xl font-semibold text-gray-800">
-                                Rajshahi
-                            </h3>
-                            <p className="text-gray-600 mt-2">
-                                Old Bus Stand, Rajshahi
-                            </p>
-                            <p className="text-sm text-gray-500">8 AM - 4 PM</p>
-                        </div>
+                    <div className='flex gap-4 justify-center items-center'>
+                        <LuLayoutGrid onClick={greed} className='size-7 cursor-pointer' />
+                        <LuLayoutList onClick={list} className='size-7 cursor-pointer' />
                     </div>
                 </div>
-
-                <div className="mt-10">
-                    <h3 className="text-3xl font-semibold text-black text-center mb-5">Supported Divisions</h3>
-                    <div className="text-center">
-                        <div className="text-lg text-gray-600">
-                            Dhaka, Chattogram, Rajshahi, Khulna, Sylhet, Barishal
-                        </div>
+                {gradView && (
+                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 m-5">
+                        {filteredItems.map(item => (
+                            <div key={item._id} className="bg-gray-200 flex flex-col rounded-md cursor-pointer transition-all relative overflow-hidden">
+                                <div className="p-4 sm:p-6">
+                                    <div className="w-full">
+                                        <img src={item.thumbnail} alt="Product 1" className="w-full aspect-[230/220] object-contain" />
+                                    </div>
+                                </div>
+                                <div className="flex flex-col h-full bg-gray-100 p-4">
+                                    <div className="">
+                                        <h3 className="text-sm sm:text-base font-bold text-gray-800">{item.title}</h3>
+                                        {item.status === "not-recovered" ? (
+                                            <h1 className="absolute top-5 text-sm sm:text-sm text-white bg-blue-600 font-bold p-2 rounded-full">{item.postType}</h1>
+                                        ) : (
+                                            <h1 className="absolute top-5 text-sm sm:text-sm text-white bg-slate-600 font-bold p-2 rounded-full">Recovered</h1>
+                                        )}
+                                        <p className="text-sm sm:text-xs">{item.location}</p>
+                                    </div>
+                                    <Link to={`/item/${item._id}`} className="btn bg-blue-600 mt-3 text-white hover:underline">Details</Link>
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                </div>
+                )}
+                {listView && (
+                    <div>
+                        {filteredItems.map(item => (
+                            <div className="m-5">
+                                <div key={item._id} className="bg-gray-200 flex flex-row rounded-md cursor-pointer transition-all relative overflow-hidden">
+                                    <div className="p-4 sm:p-6 flex-shrink-0">
+                                        <img src={item.thumbnail} alt="Product 1" className="w-24 h-24 sm:w-32 sm:h-32 object-contain" />
+                                    </div>
+                                    <div className="flex flex-col justify-between flex-grow bg-gray-100 p-4">
+                                        <div>
+                                            <h3 className="text-sm sm:text-base font-bold text-gray-800">{item.title}</h3>
+                                            {item.status === "not-recovered" ? (
+                                                <h1 className="inline-block text-sm sm:text-sm text-white bg-blue-600 font-bold px-3 py-1 rounded-full">{item.postType}</h1>
+                                            ) : (
+                                                <h1 className="inline-block text-sm sm:text-sm text-white bg-slate-600 font-bold px-3 py-1 rounded-full">Recovered</h1>
+                                            )}
+                                            <p className="text-sm sm:text-xs mt-1">{item.location}</p>
+                                        </div>
+                                        <Link to={`/item/${item._id}`} className="btn bg-blue-600 mt-3 text-white hover:underline self-start">Details</Link>
+                                    </div>
+                                </div>
+                            </div>
+
+                        ))}
+
+                    </div>
+                )}
             </div>
 
             <div>
                 <div class="my-4">
                     <div class="max-w-5xl max-lg:max-w-2xl mx-auto">
                         <div class="max-w-2xl mx-auto text-center">
-                            <h2 class="text-[#4FC3F7] text-4xl font-bold">Meet our team</h2>
+                            <h2 class="text-blue-600 text-4xl font-bold">Meet our team</h2>
                             <p class="text-gray-600 text-sm mt-4 leading-relaxed">Veniam proident aute magna anim excepteur et ex consectetur velit ullamco veniam minim aute sit. Ullamco nisi enim ipsum irure laboris ad ut. Esse cupidatat deserunt magna aute.</p>
                         </div>
 
@@ -347,19 +360,19 @@ const Home = () => {
             <div className="max-w-7xl mx-auto">
                 <div class="flex flex-col md:flex-row justify-around items-center space-y-6 md:space-y-0 md:space-x-12 py-20">
                     <div class="text-center space-y-3">
-                        <h2 class="text-5xl font-bold text-[#4FC3F7]">$23M</h2>
+                        <h2 class="text-5xl font-bold text-blue-600">$23M</h2>
                         <p class="text-gray-600 text-lg">Donations received</p>
                     </div>
                     <div class="text-center space-y-3">
-                        <h2 class="text-5xl font-bold text-[#4FC3F7]">10K</h2>
+                        <h2 class="text-5xl font-bold text-blue-600">10K</h2>
                         <p class="text-gray-600 text-lg">Families supported</p>
                     </div>
                     <div class="text-center space-y-3">
-                        <h2 class="text-5xl font-bold text-[#4FC3F7]">50+</h2>
+                        <h2 class="text-5xl font-bold text-blue-600">50+</h2>
                         <p class="text-gray-600 text-lg">Communities served</p>
                     </div>
                     <div class="text-center space-y-3">
-                        <h2 class="text-5xl font-bold text-[#4FC3F7]">100+</h2>
+                        <h2 class="text-5xl font-bold text-blue-600">100+</h2>
                         <p class="text-gray-600 text-lg">Projects implemented</p>
                     </div>
                 </div>
@@ -376,12 +389,11 @@ const Home = () => {
 
                         <div className="md:w-1/2">
                             <p>Become a Volunteer</p>
-                            <h1 className="text-5xl font-bold text-[#4FC3F7]">Why We Need You</h1>
+                            <h1 className="text-5xl font-bold text-blue-600">Why We Need You</h1>
                             <p className="py-6">
-                                Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                                quasi. In deleniti eaque aut repudiandae et a id nisi.
+                                We are always looking for volunteers to help us make a difference in the lives of those in need. Whether you can donate your time, money, or resources, your support is crucial to our mission.
                             </p>
-                            <button className="btn bg-[#4FC3F7]">Get Started</button>
+                            <button className="btn bg-blue-600">Get Started</button>
                         </div>
                     </div>
                 </div>
@@ -391,7 +403,7 @@ const Home = () => {
                     <div class="grid sm:grid-cols-2 items-start gap-14 p-8 mx-auto max-w-4xl bg-white shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md font-[sans-serif]">
                         <div>
                             <h1 class="text-gray-800 text-3xl font-extrabold">Let's Talk</h1>
-                            <p class="text-sm text-gray-500 mt-4">Have some big idea or brand to develop and need help? Then reach out we'd love to hear about your project  and provide help.</p>
+                            <p class="text-sm text-gray-500 mt-4">  </p>
 
                             <div class="mt-12">
                                 <h2 class="text-gray-800 text-base font-bold">Email</h2>
@@ -405,7 +417,7 @@ const Home = () => {
                                                     data-original="#000000" />
                                             </svg>
                                         </div>
-                                        <a href="javascript:void(0)" class="text-[#4FC3F7] text-sm ml-4">
+                                        <a href="javascript:void(0)" class="text-blue-600 text-sm ml-4">
                                             <small class="block">Mail</small>
                                             <strong>info@example.com</strong>
                                         </a>
@@ -424,7 +436,7 @@ const Home = () => {
                             <textarea placeholder='Message' rows="6"
                                 class="w-full text-gray-800 rounded-md px-4 border text-sm pt-2.5 outline-blue-500"></textarea>
                             <button type='button'
-                                class="btn text-white bg-[#4FC3F7] hover:text-black rounded-md text-sm px-4 py-3 w-full !mt-6">Send</button>
+                                class="btn text-white bg-blue-600 hover:text-black rounded-md text-sm px-4 py-3 w-full !mt-6">Send</button>
                         </form>
                     </div>
                 </div>

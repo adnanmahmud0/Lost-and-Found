@@ -9,8 +9,7 @@ const Footer = () => {
           <div className="sm:col-span-2 max-w-sm">
             <h4 className="text-base font-semibold mb-6 text-white">About Us</h4>
             <p className="text-gray-400 text-sm">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean gravida, mi eu
-              pulvinar cursus, sem elit interdum mauris.
+              We are a team of professionals who are dedicated to helping people find their lost items.
             </p>
           </div>
 

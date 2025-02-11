@@ -5,7 +5,6 @@ import Swal from 'sweetalert2';
 import { useContext, useState } from 'react';
 import { TbPassword } from "react-icons/tb";
 import { AuthContext } from '../authProvider/AuthProvider';
-import axios from "axios";
 
 const Login = () => {
     const { loginUser, loginWithGoogle } = useContext(AuthContext);
@@ -62,11 +61,6 @@ const Login = () => {
                     text: "Login Successfully!",
                     icon: "success"
                 });
-                const user = { email: email}
-                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
-                .then(res => {
-                    console.log(res.data);
-                })
                 navigate('/');
             })
             .catch(error => {

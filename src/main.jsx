@@ -30,6 +30,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+        loader: () => fetch("https://whereisit-api-server.vercel.app/items"),
       },
       {
         path: "/lost-and-found",
