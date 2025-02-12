@@ -20,6 +20,8 @@ import Item from './component/page/lostAndFound/Item';
 import MyItems from './component/page/myItems/MyItems';
 import EditMyItems from './component/page/myItems/EditMyItems';
 import AllRecoverdItem from './component/page/myItems/AllRecoverdItem';
+import Contact from './component/page/contact/Contact';
+import Error from './component/page/error/Error';
 
 
 const router = createBrowserRouter([
@@ -54,6 +56,10 @@ const router = createBrowserRouter([
         element: <ForgetPassword></ForgetPassword>
       },
       {
+        path: "/contact",
+        element: <Contact></Contact>,
+      },
+      {
         path: "/item/:id",
         element: <PrivateRoute><Item></Item></PrivateRoute>,
         loader: ({params}) => fetch(`https://whereisit-api-server.vercel.app/items/${params.id}`),
@@ -70,6 +76,10 @@ const router = createBrowserRouter([
       {
         path: "/all-recoverd-items",
         element: <PrivateRoute><AllRecoverdItem></AllRecoverdItem></PrivateRoute>,
+      },
+      {
+        path: "*",
+        element: <Error></Error>,
       }
     ]
     

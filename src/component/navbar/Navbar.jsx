@@ -10,11 +10,10 @@ const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    
-
     const link = <>
         <li><Link to="/" className="">Home</Link></li>
         <li><Link to="/lost-and-found" className="">Lost & Found</Link></li>
+        <li><Link to="/contact" className="">Contact</Link></li>
     </>
 
     const handelLogout = () => {
@@ -33,7 +32,7 @@ const Navbar = () => {
 
 
     return (
-        <div>
+        <div className="">
             <div className="navbar max-w-7xl mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
