@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",
     "firebase": "^11.1.0",
@@ -23,6 +24,7 @@
     "react-toastify": "^11.0.2",
     "sort-by": "^1.2.0",
     "sweetalert2": "^11.15.3",
+    "swiper": "^11.2.2",
     "use-axios": "^1.0.0"
   },
   "devDependencies": {
