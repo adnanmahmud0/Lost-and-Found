@@ -66,10 +66,10 @@ const Navbar = () => {
                         </div>
                         <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">{linkall}</ul>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <Link to="/" className="flex items-center space-x-2">
                         <img src={WhereIsIt} alt="" className="w-7 h-8" />
                         <a className="font-extrabold text-lg md:flex hidden"><span className="text-[#02C5BC]">Where</span><span className="text-[#363A76]">Is</span><span className="text-[#FACC01]">It</span></a>
-                    </div>
+                    </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">{link}</ul>

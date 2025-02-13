@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import { FaMapPin, FaSearch } from "react-icons/fa";
+import { FaMapPin, FaSearch, FaThLarge, FaList } from "react-icons/fa";
 
 const LostAndFound = () => {
     const [loading, setLoading] = useState(true);
@@ -20,7 +20,7 @@ const LostAndFound = () => {
     );
 
     return (
-        <div className="py-4 mx-auto max-w-7xl  min-h-screen">
+        <div className="py-4 mx-auto max-w-7xl min-h-screen">
             <h1 className="md:text-6xl text-[#02C5BC] text-3xl font-bold animate__animated animate__bounce text-center mt-24">
                 Lost and Found Items
             </h1>
@@ -37,6 +37,15 @@ const LostAndFound = () => {
                     />
                     <FaSearch />
                 </div>
+
+                {/* Toggle Button */}
+                <button 
+                    onClick={() => setGridView(!gridView)}
+                    className="flex items-center gap-2 px-4 py-2 border border-[#02C5BC] text-[#02C5BC] rounded hover:bg-[#02C5BC] hover:text-white transition-all"
+                >
+                    {gridView ? <FaList /> : <FaThLarge />}
+                    {gridView ? "List View" : "Grid View"}
+                </button>
             </div>
 
             {/* DaisyUI Loader */}

@@ -16,8 +16,10 @@ import { useState } from "react";
 import { SiGoogleclassroom } from "react-icons/si";
 import { PiChalkboardTeacherFill } from "react-icons/pi";
 import { FaCalendar, FaUser } from 'react-icons/fa';
+import { FaThLarge, FaList } from "react-icons/fa";
 
 const Home = () => {
+    const [isGridView, setIsGridView] = useState(true);
     const items = useLoaderData();
     const limitedItems = items.slice(0, 8);
     const [searchQuery, setSearchQuery] = useState('');
@@ -51,7 +53,7 @@ const Home = () => {
                             backgroundPosition: "center",
                         }}
                     >
-                        <div className="w-full flex justify-center items-center max-w-7xl mx-auto  my-72">
+                        <div className="w-full flex justify-center items-center max-w-7xl mx-auto my-72">
                             <div class=" text-center">
                                 <p className="font-semibold text-[#02C5BC]">--REBUILD LIVES FOR FUTURES--</p>
                                 <h1 class="text-4xl md:text-7xl font-bold text-white mb-6 animate__animated animate__bounce">
@@ -136,71 +138,82 @@ const Home = () => {
                                 provide warmth to those in need through generous donations and a shared sense of
                                 community.
                             </p>
-                            <button className="btn bg-transparent border border-[#FACC01] text-[#FACC01] hover:text-white hover:bg-[#FACC01] hover:border-[#FACC01]">Get Started</button>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div className="py-4 mx-auto max-w-7xl">
+                {/* Heading */}
                 <div className="flex justify-center">
-                    <span className="bg-[#383B78] text-xs text-white px-2 py-1 rounded-full">About Us</span>
+                    <span className="bg-[#383B78] text-xs text-white px-2 py-1 rounded-full">Lost & Found</span>
                 </div>
                 <div>
-                    <h1 className="md:text-6xl text-[#02C5BC] text-3xl font-bold animate__animated animate__bounce text-center">Lost and Found Items</h1>
+                    <h1 className="md:text-6xl text-[#02C5BC] text-3xl font-bold animate__animated animate__bounce text-center">
+                        Lost and Found Items
+                    </h1>
                 </div>
+
+                {/* Search Bar & Toggle Button */}
                 <div className="flex justify-between mt-6 mx-5">
-                    <div>
-                        <div className="flex px-4 py-3 rounded-md border-2 border-[#FACC01] overflow-hidden max-w-md mx-auto mt-5">
-                            <input
-                                type="text"
-                                placeholder="Search items..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full outline-none bg-transparent text-gray-600 text-sm"
-                            />
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 192.904 192.904"
-                                width="16px"
-                                className="fill-gray-600"
-                            >
-                                <path d="m190.707 180.101-47.078-47.077c11.702-14.072 18.752-32.142 18.752-51.831C162.381 36.423 125.959 0 81.191 0 36.422 0 0 36.423 0 81.193c0 44.767 36.422 81.187 81.191 81.187 19.688 0 37.759-7.049 51.831-18.751l47.079 47.078a7.474 7.474 0 0 0 5.303 2.197 7.498 7.498 0 0 0 5.303-12.803zM15 81.193C15 44.694 44.693 15 81.191 15c36.497 0 66.189 29.694 66.189 66.193 0 36.496-29.692 66.187-66.189 66.187C44.693 147.38 15 117.689 15 81.193z">
-                                </path>
-                            </svg>
-                        </div>
+                    <div className="flex px-4 py-3 rounded-md border-2 border-[#FACC01] overflow-hidden">
+                        <input
+                            type="text"
+                            placeholder="Search items..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="w-full outline-none bg-transparent text-gray-600 text-sm"
+                        />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 192.904 192.904"
+                            width="16px"
+                            className="fill-gray-600"
+                        >
+                            <path d="m190.707 180.101-47.078-47.077c11.702-14.072 18.752-32.142 18.752-51.831C162.381 36.423 125.959 0 81.191 0 36.422 0 0 36.423 0 81.193c0 44.767 36.422 81.187 81.191 81.187 19.688 0 37.759-7.049 51.831-18.751l47.079 47.078a7.474 7.474 0 0 0 5.303 2.197 7.498 7.498 0 0 0 5.303-12.803zM15 81.193C15 44.694 44.693 15 81.191 15c36.497 0 66.189 29.694 66.189 66.193 0 36.496-29.692 66.187-66.189 66.187C44.693 147.38 15 117.689 15 81.193z">
+                            </path>
+                        </svg>
                     </div>
+
+                    {/* Toggle Button */}
+                    <button
+                        onClick={() => setIsGridView(!isGridView)}
+                        className="flex items-center gap-2 px-4 py-2 border border-[#02C5BC] text-[#02C5BC] rounded hover:bg-[#02C5BC] hover:text-white transition-all"
+                    >
+                        {isGridView ? <FaList /> : <FaThLarge />}
+                        {isGridView ? "List View" : "Grid View"}
+                    </button>
                 </div>
-                {gradView && (
+
+                {/* Conditional Rendering */}
+                {isGridView ? (
+                    // Grid View
                     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 m-5">
                         {filteredItems.map((item) => (
                             <div
                                 key={item._id}
                                 className="bg-white border border-slate-200 rounded-xl overflow-hidden transition-all hover:shadow-lg relative"
                             >
-                                {/* Image Section */}
                                 <div className="relative">
                                     <img
                                         src={item.thumbnail}
                                         alt={item.title}
                                         className="w-full h-48 object-cover"
                                     />
-                                    {/* Tags */}
                                     <div className="absolute top-3 left-3 flex flex-col gap-1">
-                                        {item.postType == "Lost" && (
+                                        {item.postType === "Lost" && (
                                             <span className="bg-[#FACC01] text-white text-xs font-bold px-2 py-1 rounded">
                                                 {item.postType}
                                             </span>
                                         )}
-                                        {item.postType == "Found" && (
+                                        {item.postType === "Found" && (
                                             <span className="bg-[#02C5BC] text-white text-xs font-bold px-2 py-1 rounded">
                                                 {item.postType}
                                             </span>
                                         )}
                                     </div>
-
                                 </div>
 
-                                {/* Content Section */}
                                 <div className="p-4">
                                     <h3 className="text-lg font-bold text-gray-800">{item.title}</h3>
                                     <p className="text-gray-600 text-sm flex items-center">
@@ -213,6 +226,36 @@ const Home = () => {
                                         Details
                                     </Link>
                                 </div>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    // List View
+                    <div className="m-5">
+                        {filteredItems.map((item) => (
+                            <div
+                                key={item._id}
+                                className="flex items-center justify-between p-4 border border-slate-200 rounded-xl bg-white mb-4 transition-all hover:shadow-lg"
+                            >
+                                <div className="flex items-center gap-4">
+                                    <img
+                                        src={item.thumbnail}
+                                        alt={item.title}
+                                        className="w-16 h-16 object-cover rounded-md"
+                                    />
+                                    <div>
+                                        <h3 className="text-lg font-bold text-gray-800">{item.title}</h3>
+                                        <p className="text-gray-600 text-sm flex items-center">
+                                            <FaMapPin /> {item.location}
+                                        </p>
+                                    </div>
+                                </div>
+                                <Link
+                                    to={`/item/${item._id}`}
+                                    className="border border-[#02C5BC] text-[#02C5BC] bg-transparent hover:bg-[#02C5BC] py-2 px-4 rounded hover:text-white transition-all"
+                                >
+                                    Details
+                                </Link>
                             </div>
                         ))}
                     </div>
@@ -325,7 +368,6 @@ const Home = () => {
                             <p className="py-6">
                                 We are always looking for volunteers to help us make a difference in the lives of those in need. Whether you can donate your time, money, or resources, your support is crucial to our mission.
                             </p>
-                            <button className="btn bg-transparent border border-[#FACC01] text-[#FACC01] hover:text-white hover:bg-[#FACC01] hover:border-[#FACC01]">Get Started</button>
                         </div>
                     </div>
                 </div>
@@ -339,7 +381,7 @@ const Home = () => {
                             </div>
                             <div className="text-center max-w-xl mx-auto">
 
-                                <h2 className="text-5xl font-bold text-[#02C5BC]">LATEST BLOGS</h2>
+                                <h2 className="text-5xl font-bold text-[#02C5BC]">LATEST NEWSLETTER</h2>
                                 <p className="text-sm mt-6">
                                     Explore our latest blog posts to stay updated on the newest trends, tips, and insights in education, technology, and self-improvement.
                                 </p>

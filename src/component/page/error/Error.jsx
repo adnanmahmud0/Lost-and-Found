@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Error = () => {
   return (
     <>
-      <section className="relative z-10 bg-[#02C5BC] py-[120px]">
+      <section className="relative z-10 bg-[#02C5BC] py-[120px] flex justify-center items-center min-h-screen">
         <div className="container mx-auto">
           <div className="-mx-4 flex">
             <div className="w-full px-4">
