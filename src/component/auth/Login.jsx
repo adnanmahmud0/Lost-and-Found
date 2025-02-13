@@ -92,7 +92,7 @@ const Login = () => {
 
     return (
         <div>
-            <div className="">
+            <div className="pt-10">
                 <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
                     <div className="grid md:grid-cols-2 items-center gap-4 max-w-6xl w-full">
                         <div className="border border-[] rounded-lg p-6 max-w-md shadow-[0_2px_22px_-4px_rgba(93,96,127,0.2)] max-md:mx-auto">
@@ -136,7 +136,7 @@ const Login = () => {
                                             type="checkbox"
                                             className="h-4 w-4 shrink-0 text-[#02C5BC] focus:ring-[#02C5BC] border-gray-300 rounded"
                                         />
-                                        <label  htmlFor="remember-me" className="ml-3 block text-sm text-gray-800">
+                                        <label  htmlFor="remember-me" className="ml-3 block text-sm text-gray-500">
                                             Show Password
                                         </label>
                                     </div>
@@ -156,7 +156,7 @@ const Login = () => {
                                         Log in
                                     </button>
                                 </div>
-                                <div className="text-center text-[#363A76] text-sm mt-4">
+                                <div className="text-center text-gray-500 text-sm mt-4">
                                     OR
                                 </div>
                                 <div>
@@ -170,7 +170,7 @@ const Login = () => {
                                     </button>
                                 </div>
 
-                                <p className="text-sm !mt-8 text-center text-gray-800">
+                                <p className="text-sm !mt-8 text-center text-gray-500">
                                     Don't have an account{' '}
                                     <Link to="/register" className="text-[#FACC01] font-semibold hover:underline ml-1 whitespace-nowrap">
                                         Register here

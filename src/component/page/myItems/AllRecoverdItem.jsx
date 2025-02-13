@@ -25,7 +25,7 @@ const AllRecoverdItem = () => {
 
 
     return (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto pt-20">
             {items.length === 0 ? (
                 <p className="text-center text-gray-500">You don't have any posts</p>
             ) : (

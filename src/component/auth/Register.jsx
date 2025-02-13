@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import { ToastContainer, toast } from 'react-toastify';
 import { AuthContext } from "../authProvider/AuthProvider";
+import login from "../../assets/login.png";
 
 const Register = () => {
     const { createUser, updateUserProfile } = useContext(AuthContext);
@@ -61,10 +62,10 @@ const Register = () => {
             <div className="min-h-screen flex flex-col items-center justify-center p-6">
                 <div className="grid lg:grid-cols-2 items-center gap-6 max-w-7xl max-lg:max-w-xl w-full">
                     <form onSubmit={handleRegister} className="lg:max-w-md w-full">
-                        <h3 className="text-gray-800 text-3xl font-extrabold mb-12">Registration</h3>
+                        <h3 className="text-[#02C5BC] text-3xl font-bold animate__animated animate__bounce mb-5">Registration</h3>
                         <div className="space-y-6">
                             <div>
-                                <label className="text-gray-800 text-sm mb-2 block">Name</label>
+                                <label className="text-sm mb-2 block">Name</label>
                                 <input
                                     name="name"
                                     type="text"
@@ -73,7 +74,7 @@ const Register = () => {
                                 />
                             </div>
                             <div>
-                                <label className="text-gray-800 text-sm mb-2 block">Email</label>
+                                <label className="text-sm mb-2 block">Email</label>
                                 <input
                                     name="email"
                                     type="text"
@@ -82,7 +83,7 @@ const Register = () => {
                                 />
                             </div>
                             <div>
-                                <label className="text-gray-800 text-sm mb-2 block">Photo URL</label>
+                                <label className="text-sm mb-2 block">Photo URL</label>
                                 <input
                                     name="photo"
                                     type="text"
@@ -91,7 +92,7 @@ const Register = () => {
                                 />
                             </div>
                             <div>
-                                <label className="text-gray-800 text-sm mb-2 block">Password</label>
+                                <label className="text-sm mb-2 block">Password</label>
                                 <input
                                     name="password"
                                     type={showPassword ? "text" : "password"}
@@ -107,7 +108,7 @@ const Register = () => {
                                     type="checkbox"
                                     className="h-4 w-4 shrink-0 border-gray-300 rounded"
                                 />
-                                <label htmlFor="togglePassword" className="ml-3 block text-sm text-gray-800">
+                                <label htmlFor="togglePassword" className="ml-3 block text-sm">
                                     Show Password
                                 </label>
                             </div>
@@ -116,14 +117,14 @@ const Register = () => {
                         <div className="mt-12">
                             <button
                                 type="submit"
-                                className="py-4 px-8 text-sm font-semibold text-white tracking-wide bg-blue-600 hover:bg-blue-700 focus:outline-none"
+                                className="py-4 px-8 text-sm font-semibold text-white tracking-wide bg-[#02C5BC] hover:bg-[#02C5BC] focus:outline-none"
                             >
                                 Create an account
                             </button>
                         </div>
-                        <p className="text-sm text-gray-800 mt-6">
+                        <p className="text-sm mt-6">
                             Already have an account?{' '}
-                            <Link to="/login" className="text-blue-600 font-semibold hover:underline ml-1">
+                            <Link to="/login" className="text-[#02C5BC] font-semibold hover:underline ml-1">
                                 Login here
                             </Link>
                         </p>
@@ -131,7 +132,7 @@ const Register = () => {
 
                     <div className="h-full max-lg:mt-12">
                         <img
-                            src="https://readymadeui.com/login-image.webp"
+                            src={login}
                             className="w-full h-full object-cover"
                             alt="Dining Experience"
                         />
