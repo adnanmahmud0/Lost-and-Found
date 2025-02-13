@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import { LuLayoutList, LuLayoutGrid } from "react-icons/lu";
-import { FaMapPin } from "react-icons/fa";
-import { FaSearch } from "react-icons/fa";
+import { FaMapPin, FaSearch } from "react-icons/fa";
 
 const LostAndFound = () => {
+    const [loading, setLoading] = useState(true);
     const items = useLoaderData();
     const [searchQuery, setSearchQuery] = useState('');
     const [gridView, setGridView] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000);
+    }, []);
 
     const filteredItems = items.filter(item =>
         item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -15,10 +20,12 @@ const LostAndFound = () => {
     );
 
     return (
-        <div className="py-4 mx-auto max-w-7xl">
-            <h1 className="md:text-6xl text-[#02C5BC] text-3xl font-bold animate__animated animate__bounce text-center mt-24">Lost and Found Items</h1>
+        <div className="py-4 mx-auto max-w-7xl  min-h-screen">
+            <h1 className="md:text-6xl text-[#02C5BC] text-3xl font-bold animate__animated animate__bounce text-center mt-24">
+                Lost and Found Items
+            </h1>
 
-            {/* Search Bar & View Toggle */}
+            {/* Search Bar */}
             <div className="flex justify-between mt-6 mx-5">
                 <div className="flex px-4 py-3 rounded-md border-2 border-[#02C5BC] max-w-md">
                     <input
@@ -32,22 +39,24 @@ const LostAndFound = () => {
                 </div>
             </div>
 
-            {/* Grid View */}
-            {gridView ? (
+            {/* DaisyUI Loader */}
+            {loading ? (
+                <div className="flex justify-center items-center">
+                    <span className="loading loading-spinner loading-lg text-[#02C5BC] min-h-screen"></span>
+                </div>
+            ) : gridView ? (
+                // Grid View
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 m-5">
                     {filteredItems.map((item) => (
                         <div key={item._id} className="bg-white border border-slate-200 rounded-xl overflow-hidden transition-all hover:shadow-lg relative">
-                            {/* Image */}
                             <div className="relative">
                                 <img src={item.thumbnail} alt={item.title} className="w-full h-48 object-cover" />
-                                {/* Tags */}
                                 <div className="absolute top-3 left-3">
                                     <span className={`text-white text-xs font-bold px-2 py-1 rounded ${item.postType === "Lost" ? "bg-yellow-500" : "bg-teal-500"}`}>
                                         {item.postType}
                                     </span>
                                 </div>
                             </div>
-                            {/* Content */}
                             <div className="p-4">
                                 <h3 className="text-lg font-bold text-gray-800">{item.title}</h3>
                                 <p className="text-gray-600 text-sm flex items-center gap-1">

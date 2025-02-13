@@ -2,16 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../authProvider/AuthProvider';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { Link, useLoaderData } from 'react-router-dom';
-
-
+import { Link } from 'react-router-dom';
 
 const MyItems = () => {
-
     const { user } = useContext(AuthContext);
     const [items, setItems] = useState([]);
-    
-
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -20,13 +16,13 @@ const MyItems = () => {
                 setItems(response.data);
             } catch (error) {
                 console.error("Error fetching items:", error);
+            } finally {
+                setLoading(false);
             }
         };
 
         fetchItems();
     }, [user.email]);
-
-    console.log(items);
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -47,18 +43,22 @@ const MyItems = () => {
                 });
             }
         });
-
     };
 
     return (
-        <div className="overflow-x-auto pt-20">
-            {items.length === 0 ? (
+        <div className="overflow-x-auto pt-20 min-h-screen">
+            {/* Show Loader while fetching data */}
+            {loading ? (
+                <div className="flex justify-center items-center min-h-screen">
+                    <span className="loading loading-spinner loading-lg text-[#02C5BC]"></span>
+                </div>
+            ) : items.length === 0 ? (
                 <p className="text-center text-gray-500">You don't have any posts</p>
             ) : (
                 <table className="min-w-full bg-white">
                     <thead className="whitespace-nowrap">
                         <tr>
-                            <th className="p-4 text-left text-sm font-semibold text-black">Title & Description </th>
+                            <th className="p-4 text-left text-sm font-semibold text-black">Title & Description</th>
                             <th className="p-4 text-left text-sm font-semibold text-black">Location</th>
                             <th className="p-4 text-left text-sm font-semibold text-black">Date</th>
                             <th className="p-4 text-left text-sm font-semibold text-black">Status & Post Type</th>
@@ -67,7 +67,7 @@ const MyItems = () => {
                     </thead>
                     <tbody className="whitespace-nowrap">
                         {items.map((item) => (
-                            <tr key={item.id} className="odd:bg-blue-50">
+                            <tr key={item._id} className="odd:bg-blue-50">
                                 <td className="p-4 text-sm">
                                     <div className="flex items-center cursor-pointer w-max">
                                         <img
@@ -81,13 +81,7 @@ const MyItems = () => {
                                         </div>
                                     </div>
                                 </td>
-                                <td className="p-4 text-sm">
-                                    <div className="">
-                                        <div
-
-                                        >{item.location}</div>
-                                    </div>
-                                </td>
+                                <td className="p-4 text-sm">{item.location}</td>
                                 <td className="p-4 text-sm">{item.xDateLost}</td>
                                 <td className="p-4 text-sm">
                                     <div className="ml-4">
@@ -116,7 +110,8 @@ const MyItems = () => {
                             </tr>
                         ))}
                     </tbody>
-                </table>)}
+                </table>
+            )}
         </div>
     );
 };
