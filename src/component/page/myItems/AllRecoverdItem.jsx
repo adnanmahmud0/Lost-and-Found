@@ -23,7 +23,7 @@ const AllRecoverdItem = () => {
     }, [user.email]);
 
     return (
-        <div className='min-h-screen'>
+        <div className='max-w-7xl mx-auto'>
             <div className="overflow-x-auto pt-20 ">
                 {/* Show Loader while fetching data */}
                 {loading ? (
