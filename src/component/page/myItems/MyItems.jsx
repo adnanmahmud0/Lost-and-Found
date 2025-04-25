@@ -8,6 +8,7 @@ const MyItems = () => {
     const { user } = useContext(AuthContext);
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [dropdownOpen, setDropdownOpen] = useState(null);
 
     useEffect(() => {
         if (!user?.email) return;
@@ -39,7 +40,7 @@ const MyItems = () => {
 
         if (result.isConfirmed) {
             await axios.delete(`https://whereisit-api-server.vercel.app/items/${id}`);
-            setItems((prev) => prev.filter(item => item._id !== id)); // update state immediately
+            setItems((prev) => prev.filter(item => item._id !== id));
             Swal.fire({
                 title: "Deleted!",
                 text: "Your file has been deleted.",
@@ -47,6 +48,16 @@ const MyItems = () => {
             });
         }
     };
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (!e.target.closest(".dropdown-action")) {
+                setDropdownOpen(null);
+            }
+        };
+        window.addEventListener("click", handleClickOutside);
+        return () => window.removeEventListener("click", handleClickOutside);
+    }, []);
 
     return (
         <div className="overflow-x-auto pt-20 max-w-7xl mx-auto px-4">
@@ -90,23 +101,35 @@ const MyItems = () => {
                                         <p>{item.status}</p>
                                         <p className="text-xs text-gray-500 dark:text-gray-400">{item.postType}</p>
                                     </td>
-                                    <td className="p-4">
-                                        <Link
-                                            className="mr-4"
-                                            title="Edit"
-                                            to={`/edit-my-items/${item._id}`}
-                                            aria-label="Edit"
-                                        >
-                                            ✏️
-                                        </Link>
-                                        <button
-                                            className="mr-4"
-                                            title="Delete"
-                                            onClick={() => handleDelete(item._id)}
-                                            aria-label="Delete"
-                                        >
-                                            🗑️
-                                        </button>
+                                    <td className="p-4 relative">
+                                        <div className="relative dropdown-action inline-block text-left">
+                                            <button
+                                                onClick={() => setDropdownOpen(dropdownOpen === item._id ? null : item._id)}
+                                                className="text-xl hover:text-gray-600"
+                                                title="Actions"
+                                            >
+                                                ⋮
+                                            </button>
+
+                                            {dropdownOpen === item._id && (
+                                                <div className="absolute z-10 right-0 mt-2 w-28 origin-top-right rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
+                                                    <div className="py-1 text-sm">
+                                                        <Link
+                                                            to={`/edit-my-items/${item._id}`}
+                                                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                        >
+                                                            ✏️ Edit
+                                                        </Link>
+                                                        <button
+                                                            onClick={() => handleDelete(item._id)}
+                                                            className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                        >
+                                                            🗑️ Delete
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
                                     </td>
                                 </tr>
                             ))}
