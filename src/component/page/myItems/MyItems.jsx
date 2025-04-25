@@ -46,7 +46,7 @@ const MyItems = () => {
     };
 
     return (
-        <div className="overflow-x-auto pt-20 min-h-screen">
+        <div className="overflow-x-auto pt-20 max-w-7xl mx-auto">
             {/* Show Loader while fetching data */}
             {loading ? (
                 <div className="flex justify-center items-center min-h-screen">
