@@ -32,7 +32,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-12">
-          <p className='text-gray-400 text-sm'>© ReadymadeUI. All rights reserved.</p>
+          <p className='text-gray-400 text-sm'>© adnanmahmud99. All rights reserved.</p>
         </div>
       </div>
     </footer>
