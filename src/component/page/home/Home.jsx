@@ -131,13 +131,13 @@ const Home = () => {
                         </div>
                         <div className="md:w-1/2 p-5">
                             <span className="bg-[#383B78] text-xs text-white px-2 py-1 rounded-full">About Us</span>
-                            <h1 className="md:text-6xl text-[#02C5BC] text-3xl font-bold animate__animated animate__bounce">Lost item has <br /> a story</h1>
+                            <h1 className="md:text-6xl text-[#02C5BC] text-3xl font-bold animate__animated animate__bounce">
+                                Every Lost Item <br /> Tells a Story
+                            </h1>
                             <p className="py-6">
-                                When winter comes, thousands of lives across Bangladesh are impacted by the harsh cold.
-                                At <span class="text-[#02C5BC] font-semibold">Where Is It</span>, we strive to
-                                provide warmth to those in need through generous donations and a shared sense of
-                                community.
+                                As winter grips Bangladesh, countless lives are affected by the bitter cold. At <span className="text-[#02C5BC] font-semibold">Where Is It</span>, we are committed to bringing warmth and hope through heartfelt donations and a strong community spirit. Together, we can make a difference—one item at a time.
                             </p>
+
                         </div>
                     </div>
                 </div>
@@ -373,17 +373,16 @@ const Home = () => {
                 </div>
             </div>
             <div>
-                <div class="my-16">
-                    <div className=" p-4 my-20">
+                <div className="my-16">
+                    <div className="p-4 my-20">
                         <div className="max-w-7xl mx-auto">
-                            <div className='flex justify-center '>
-                                <div className='text-xs text-white rounded-full py-1 px-3 bg-[#383B78] hover:bg-[#383B78] mb-3'>News & Blogs</div>
+                            <div className="flex justify-center">
+                                <div className="text-xs text-white rounded-full py-1 px-3 bg-[#383B78] hover:bg-[#383B78] mb-3">News & Blogs</div>
                             </div>
                             <div className="text-center max-w-xl mx-auto">
-
                                 <h2 className="text-5xl font-bold text-[#02C5BC]">LATEST NEWSLETTER</h2>
                                 <p className="text-sm mt-6">
-                                    Explore our latest blog posts to stay updated on the newest trends, tips, and insights in education, technology, and self-improvement.
+                                    Stay informed with our latest blog posts on cutting-edge trends, actionable tips, and insights in education, technology, and personal growth.
                                 </p>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-12 max-lg:max-w-3xl max-md:max-w-md mx-auto">
@@ -399,10 +398,10 @@ const Home = () => {
                                             <FaCalendar className="inline-block mr-2" /> 10 FEB 2023 |{' '}
                                             <FaUser className="inline-block mr-2" /> BY JOHN DOE
                                         </span>
-                                        <h3 className="text-xl font-bold text-[#02C5BC]">A Guide to Igniting Your Imagination</h3>
+                                        <h3 className="text-xl font-bold text-[#02C5BC]">Unlock Your Creativity: A Guide to Imagination</h3>
                                         <div className="mt-4">
                                             <p className="text-gray-200 text-sm">
-                                                Learn how to ignite your creativity and start thinking outside the box. This blog post offers practical tips to inspire your imagination and fuel your journey towards innovative thinking.
+                                                Discover how to spark your creativity and break free from conventional thinking. This post provides actionable advice to help you cultivate an innovative mindset and boost your creative potential.
                                             </p>
                                         </div>
                                     </div>
@@ -420,10 +419,10 @@ const Home = () => {
                                             <FaCalendar className="inline-block mr-2" /> 7 JUN 2023 |{' '}
                                             <FaUser className="inline-block mr-2" /> BY MARK ADAIR
                                         </span>
-                                        <h3 className="text-xl font-bold text-[#02C5BC]">Hacks to Supercharge Your Day</h3>
+                                        <h3 className="text-xl font-bold text-[#02C5BC]">Maximize Your Productivity: Simple Life Hacks</h3>
                                         <div className="mt-4">
                                             <p className="text-gray-200 text-sm">
-                                                Discover effective life hacks and time management strategies that can help you boost productivity and make the most of your day. Whether you’re a student or a working professional, this post offers tips for everyone.
+                                                Looking for ways to streamline your day? This post uncovers essential life hacks and time-saving techniques to enhance productivity. Perfect for students, professionals, and anyone looking to get more done.
                                             </p>
                                         </div>
                                     </div>
@@ -441,10 +440,10 @@ const Home = () => {
                                             <FaCalendar className="inline-block mr-2" /> 5 OCT 2023 |{' '}
                                             <FaUser className="inline-block mr-2" /> BY SIMON KONECKI
                                         </span>
-                                        <h3 className="text-xl font-bold text-[#02C5BC]">Trends and Predictions</h3>
+                                        <h3 className="text-xl font-bold text-[#02C5BC]">Future Trends: What’s Next in Education & Tech?</h3>
                                         <div className="mt-4">
                                             <p className="text-gray-200 text-sm">
-                                                Stay ahead of the curve by reading our latest trends and predictions in the education and tech industries. In this blog post, we highlight emerging trends, innovative technologies, and how they are shaping the future.
+                                                Stay ahead of the game by exploring emerging trends in education and technology. In this blog post, we dive into the key innovations and predictions that will shape the future of these industries.
                                             </p>
                                         </div>
                                     </div>
@@ -453,6 +452,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
+
             </div>
 
         </div>
