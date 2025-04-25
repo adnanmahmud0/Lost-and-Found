@@ -8,9 +8,13 @@ const AllRecoverdItem = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        if (!user?.email) return;
+
         const fetchItems = async () => {
             try {
-                const response = await axios.get(`https://whereisit-api-server.vercel.app/recovered-item?email=${user.email}`);
+                const response = await axios.get(
+                    `https://whereisit-api-server.vercel.app/recovered-item?email=${user.email}`
+                );
                 setItems(response.data);
             } catch (error) {
                 console.error("Error fetching items:", error);
@@ -20,40 +24,39 @@ const AllRecoverdItem = () => {
         };
 
         fetchItems();
-    }, [user.email]);
+    }, [user?.email]);
 
     return (
-        <div className='max-w-7xl mx-auto'>
-            <div className="overflow-x-auto pt-20 ">
-                {/* Show Loader while fetching data */}
+        <div className='max-w-7xl mx-auto px-4'>
+            <div className="overflow-x-auto pt-20">
                 {loading ? (
                     <div className="flex justify-center items-center min-h-screen">
                         <span className="loading loading-spinner loading-lg text-[#02C5BC]"></span>
                     </div>
                 ) : items.length === 0 ? (
-                    <p className="text-center text-gray-500">You don't have any posts</p>
+                    <p className="text-center text-gray-500">You don't have any recovered items.</p>
                 ) : (
-                    <table className="min-w-full bg-white">
-                        <thead className="whitespace-nowrap">
+                    <table className="min-w-full bg-white rounded-lg shadow">
+                        <thead className="bg-gray-100">
                             <tr>
                                 <th className="p-4 text-left text-sm font-semibold text-black">Title & Description</th>
                                 <th className="p-4 text-left text-sm font-semibold text-black">Location</th>
                                 <th className="p-4 text-left text-sm font-semibold text-black">Date</th>
-                                <th className="p-4 text-left text-sm font-semibold text-black">Status & Post Type</th>
+                                <th className="p-4 text-left text-sm font-semibold text-black">Status & Type</th>
                             </tr>
                         </thead>
-                        <tbody className="whitespace-nowrap">
+                        <tbody>
                             {items.map((item) => (
-                                <tr key={item.id} className="odd:bg-blue-50">
+                                <tr key={item._id} className="odd:bg-blue-50 border-b">
                                     <td className="p-4 text-sm">
-                                        <div className="flex items-center cursor-pointer w-max">
+                                        <div className="flex items-center gap-3">
                                             <img
                                                 src={item.thumbnail}
                                                 alt={item.title}
-                                                className="w-9 h-9 rounded-md shrink-0"
+                                                className="w-10 h-10 rounded-md object-cover"
                                             />
-                                            <div className="ml-4">
-                                                <p className="text-sm text-black">{item.title}</p>
+                                            <div>
+                                                <p className="font-medium text-black">{item.title}</p>
                                                 <p className="text-xs text-gray-500">{item.description}</p>
                                             </div>
                                         </div>
@@ -61,8 +64,8 @@ const AllRecoverdItem = () => {
                                     <td className="p-4 text-sm">{item.location}</td>
                                     <td className="p-4 text-sm">{item.xDateLost}</td>
                                     <td className="p-4 text-sm">
-                                        <div className="ml-4">
-                                            <p className="text-sm text-black">{item.status}</p>
+                                        <div>
+                                            <p className="text-sm font-medium">{item.status}</p>
                                             <p className="text-xs text-gray-500">{item.postType}</p>
                                         </div>
                                     </td>
@@ -73,7 +76,6 @@ const AllRecoverdItem = () => {
                 )}
             </div>
         </div>
-
     );
 };
 
